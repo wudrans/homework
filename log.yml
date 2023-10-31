@@ -1,0 +1,34 @@
+version: 1  #必选
+disable_existing_loggers: False  #将信息传播到配置文件的根日志记录器中
+formatters:
+  default:
+    (): coloredlogs.ColoredFormatter  # 显示颜色  error为red
+    format: "%(message)s"
+    datefmt: '%Y-%m-%d %H:%M:%S'
+  detailed:
+    format: "%(message)s"
+    datefmt: '%Y-%m-%d %H:%M:%S'
+
+handlers:
+  console:
+    class : logging.StreamHandler #必选
+    formatter: default
+    level: DEBUG
+    stream: ext://sys.stdout
+  file:
+    class: logging.FileHandler
+    formatter: detailed
+    level: INFO
+    filename: math.txt
+    encoding: utf8
+    mode: 'w'
+
+loggers:
+  detailed:
+    handlers: [console, file]
+    level: DEBUG
+  brief:
+    handlers: [console]
+    level: DEBUG
+
+
